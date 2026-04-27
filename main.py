@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import re
+import sys
 import time
 from calendar import timegm
 from datetime import datetime, timedelta
@@ -450,6 +451,13 @@ def build_error_message(start_time: datetime, end_time: datetime, reason: str) -
     )
 
 
+def deliver_or_exit(markdown_text: str) -> None:
+    """Send message and fail the workflow when WeCom delivery does not succeed."""
+    if not send_to_wecom(markdown_text):
+        logger.error("WeCom message was not delivered. Please check WECOM_WEBHOOK in GitHub Secrets.")
+        sys.exit(1)
+
+
 def main() -> None:
     start_time, end_time = get_time_window()
     logger.info("News window: %s to %s", start_time, end_time)
@@ -469,7 +477,7 @@ def main() -> None:
 
     if failed_sources == len(sources) and sources:
         logger.error("All news sources failed.")
-        send_to_wecom(build_error_message(start_time, end_time, "全部新闻源抓取失败"))
+        deliver_or_exit(build_error_message(start_time, end_time, "全部新闻源抓取失败"))
         return
 
     normalized_items = []
@@ -491,17 +499,17 @@ def main() -> None:
     candidates = sorted(deduped_items, key=lambda x: x.get("score", 0), reverse=True)[:MAX_CANDIDATES_FOR_LLM]
 
     if not candidates:
-        send_to_wecom(build_no_news_message(start_time, end_time))
+        deliver_or_exit(build_no_news_message(start_time, end_time))
         return
 
     candidate_payload = build_candidate_payload(candidates)
     try:
         briefing = generate_briefing_with_minimax(candidate_payload, start_time, end_time)
     except Exception:
-        send_to_wecom(build_error_message(start_time, end_time, "MiniMax 生成简报失败"))
+        deliver_or_exit(build_error_message(start_time, end_time, "MiniMax 生成简报失败"))
         return
 
-    send_to_wecom(briefing)
+    deliver_or_exit(briefing)
 
 
 if __name__ == "__main__":
