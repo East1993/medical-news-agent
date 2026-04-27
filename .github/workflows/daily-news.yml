@@ -1,0 +1,28 @@
+name: Daily Medical Device News
+
+on:
+  schedule:
+    - cron: "10 9 * * *"
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run news agent
+        env:
+          MINIMAX_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
+          MINIMAX_BASE_URL: ${{ secrets.MINIMAX_BASE_URL }}
+          MINIMAX_MODEL: ${{ secrets.MINIMAX_MODEL }}
+          WECOM_WEBHOOK: ${{ secrets.WECOM_WEBHOOK }}
+        run: python main.py
