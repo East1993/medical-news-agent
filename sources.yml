@@ -1,0 +1,174 @@
+sources:
+  - name: 国家药品监督管理局
+    type: webpage
+    url: https://www.nmpa.gov.cn/ylqx/index.html
+    priority: high
+    category: regulator
+
+  - name: 国家药监局医疗器械审评中心
+    type: webpage
+    url: https://www.cmde.org.cn/xwdt/zxyw/
+    priority: high
+    category: regulator
+
+  - name: 国家卫生健康委员会
+    type: webpage
+    url: https://www.nhc.gov.cn/xcs/yqfkdt/list_gzbd.shtml
+    priority: high
+    category: government
+
+  - name: 国家医疗保障局
+    type: webpage
+    url: https://www.nhsa.gov.cn/col/col14/index.html
+    priority: high
+    category: regulator
+
+  - name: 国家医保局医药价格和招标采购指导中心
+    type: webpage
+    url: https://www.nhsa.gov.cn/col/col109/index.html
+    priority: high
+    category: procurement
+
+  - name: 中国政府网政策
+    type: webpage
+    url: https://www.gov.cn/zhengce/
+    priority: high
+    category: government
+
+  - name: 中国政府网最新
+    type: webpage
+    url: https://www.gov.cn/yaowen/
+    priority: medium
+    category: government
+
+  - name: 中国医疗器械行业协会
+    type: webpage
+    url: https://www.camdi.org/news/index.html
+    priority: medium
+    category: association
+
+  - name: 医疗器械创新网
+    type: webpage
+    url: https://www.innomd.org/
+    priority: medium
+    category: industry
+
+  - name: 全国公共资源交易平台
+    type: webpage
+    url: https://www.ggzy.gov.cn/information/html/a/670000/0101/list.html
+    priority: high
+    category: procurement
+
+  - name: 北京市医药集中采购服务中心
+    type: webpage
+    url: https://yp.bjmbc.org.cn/
+    priority: high
+    category: procurement
+
+  - name: 上海阳光医药采购网
+    type: webpage
+    url: https://www.smpaa.cn/
+    priority: high
+    category: procurement
+
+  - name: 广东省药品交易中心
+    type: webpage
+    url: https://www.gdmede.com.cn/
+    priority: high
+    category: procurement
+
+  - name: 浙江省药械采购平台
+    type: webpage
+    url: https://www.zjyxcg.cn/
+    priority: high
+    category: procurement
+
+  - name: 江苏省公共资源交易中心
+    type: webpage
+    url: https://jsggzy.jszwfw.gov.cn/
+    priority: high
+    category: procurement
+
+  - name: 山东省公共资源交易中心
+    type: webpage
+    url: https://ggzyjy.shandong.gov.cn/
+    priority: high
+    category: procurement
+
+  - name: 四川省药械集中采购及医药价格监管平台
+    type: webpage
+    url: https://www.scyxzbcg.cn/
+    priority: high
+    category: procurement
+
+  - name: 广东省药品监督管理局
+    type: webpage
+    url: https://mpa.gd.gov.cn/xwdt/
+    priority: high
+    category: regulator
+
+  - name: 浙江省药品监督管理局
+    type: webpage
+    url: https://mpa.zj.gov.cn/col/col1228989357/index.html
+    priority: high
+    category: regulator
+
+  - name: 江苏省药品监督管理局
+    type: webpage
+    url: https://da.jiangsu.gov.cn/col/col84614/index.html
+    priority: high
+    category: regulator
+
+  - name: 山东省药品监督管理局
+    type: webpage
+    url: http://mpa.shandong.gov.cn/col/col101741/index.html
+    priority: high
+    category: regulator
+
+  - name: 广东省卫生健康委员会
+    type: webpage
+    url: https://wsjkw.gd.gov.cn/zwgk/
+    priority: medium
+    category: government
+
+  - name: 浙江省卫生健康委员会
+    type: webpage
+    url: https://wsjkw.zj.gov.cn/col/col1202101/index.html
+    priority: medium
+    category: government
+
+  - name: 广东省医疗保障局
+    type: webpage
+    url: https://hsa.gd.gov.cn/zwgk/
+    priority: high
+    category: regulator
+
+  - name: 浙江省医疗保障局
+    type: webpage
+    url: https://ybj.zj.gov.cn/col/col1229113757/index.html
+    priority: high
+    category: regulator
+
+  - name: 新华网
+    type: rss
+    url: https://www.news.cn/politics/news_politics.xml
+    priority: medium
+    category: media
+
+  - name: 人民网健康
+    type: webpage
+    url: http://health.people.com.cn/
+    priority: medium
+    category: media
+
+  - name: 央视网新闻
+    type: rss
+    url: https://news.cctv.com/rss/china.xml
+    priority: medium
+    category: media
+
+  - name: 中国新闻网健康
+    type: webpage
+    url: https://www.chinanews.com.cn/jiankang.shtml
+    priority: medium
+    category: media
