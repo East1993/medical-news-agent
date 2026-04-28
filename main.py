@@ -350,8 +350,32 @@ def generate_briefing_with_minimax(
 2. 最终保留 3-8 条；如果没有符合要求的新闻，输出无新闻提示。
 3. 不要编造候选新闻之外的事实、链接、标题。
 4. 时间范围必须写成：{start_text} 至 {end_text}
-5. 原文入口必须使用候选新闻中的 URL。
-6. 每条新闻必须归入最合适的模块；没有内容的模块不要输出。
+5. 每条新闻必须使用候选新闻中的 url 作为原文链接。
+6. 不要输出模块分组，不要输出长篇分析，不要输出思考过程。
+7. 严禁输出 <think>、</think> 或任何模型推理过程。
+8. 每条新闻只允许包含：标题、时间、来源、摘要、原文。
+
+请严格使用以下格式：
+
+# 医疗器械行业每日情报简报
+时间范围：{start_text} 至 {end_text}
+
+## 1. 新闻标题
+
+**时间：** YYYY-MM-DD HH:mm
+
+**来源：** 来源名称
+
+**摘要：** 1-2 句话，说明新闻事实和 B 端业务价值。
+
+**原文：** [点击查看原文](候选新闻url)
+
+如果没有符合要求的新闻，只输出：
+
+# 医疗器械行业每日情报简报
+时间范围：{start_text} 至 {end_text}
+
+今日无符合条件的高价值医疗器械行业新闻。
 
 候选新闻 JSON：
 {candidate_payload}
@@ -373,10 +397,20 @@ def generate_briefing_with_minimax(
         content = response.choices[0].message.content
         if not content:
             raise RuntimeError("MiniMax returned an empty response.")
-        return content.strip()
+        return clean_model_output(content.strip())
     except Exception as exc:
         logger.exception("MiniMax briefing generation failed: %s", exc)
         raise
+
+
+def clean_model_output(content: str) -> str:
+    """Remove reasoning text that some models may emit before the final Markdown."""
+    content = re.sub(r"<think>.*?</think>", "", content, flags=re.DOTALL | re.IGNORECASE)
+    content = re.sub(r"^\s*思考[:：].*?(?=# 医疗器械行业每日情报简报)", "", content, flags=re.DOTALL)
+    marker = "# 医疗器械行业每日情报简报"
+    if marker in content:
+        content = content[content.find(marker):]
+    return content.strip()
 
 
 def send_to_wecom(markdown_text: str) -> bool:
